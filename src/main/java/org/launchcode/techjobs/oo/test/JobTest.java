@@ -43,18 +43,18 @@ public class JobTest {
     public void testJobsForEquality(){
         Job a = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         Job b = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        assertFalse(a.getId() == b.getId());
+        assertFalse(a.equals(b));
     }
 
     @Test
     public void testToStringStartsAndEndsWithNewLine() {
         Job a = new Job();
-        Character first = a.toString().charAt(0);
+        char first = a.toString().charAt(0);
         int lastIndex = a.toString().length() -1;
-        Character last = a.toString().charAt(lastIndex);
-        Character newLine = '\n';
-        assertEquals(first, newLine);
-        assertEquals(last, newLine);
+        char last = a.toString().charAt(lastIndex);
+//        Character newLine = '\n';
+        assertEquals(first, '\n');
+        assertEquals(last, '\n');
     }
     @Test
     public void testToStringContainsCorrectLabelsAndData() {

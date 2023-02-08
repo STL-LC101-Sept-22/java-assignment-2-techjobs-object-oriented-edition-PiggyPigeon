@@ -36,18 +36,22 @@ public class Job {
     @Override
     public String toString() {
         if (jobDoesntExist()) {
-            return "OOPS! This job does not seem to exist.";
+            return "\nOOPS! This job does not seem to exist.\n";
         }
         return '\n' +
                 "ID: " + id + '\n' +
-                "Name: " + getData(name) + '\n' +
+                "Name: " + getData(name)  + '\n' +
                 "Employer: " + getData(employer) + '\n' +
                 "Location: " + getData(location) + '\n' +
                 "Position Type: " + getData(positionType) + '\n' +
                 "Core Competency: " + getData(coreCompetency) + '\n';
     }
-    private Object getData(Object ex){
-        return ex == null ? "Data not available" : ex;
+    private Object getData(JobField ex){
+        return getData(ex == null ? null : ex.getValue());
+    }
+
+    private Object getData(String ex) {
+        return ex == null || ex.isEmpty() ? "Data not available" : ex;
     }
 
     private Boolean jobDoesntExist() {
@@ -101,5 +105,18 @@ public class Job {
 
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return id == job.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
